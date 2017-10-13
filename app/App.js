@@ -10,7 +10,7 @@ export default class App extends Component<{}> {
   constructor(props){
     super(props);
     this.state = {
-      shoe: [[], [], [], [], [], [], [], []],
+      shoe: [],
       playerCards: [],
       bankerCards: [],
       lastMoves: []
@@ -18,27 +18,34 @@ export default class App extends Component<{}> {
       panda: false,
       tie: false,
       playerWon: false,
-      bankerWon: false
+      bankerWon: false,
+      currentPlayers: ['Player1', 'Player2', 'Player3', 'Player4']
     }
 
+    this.createQueue = this.createQueue.bind(this);
     this.fisherYatesShuffle = this.fisherYatesShuffle.bind(this);
     this.shuffleShoe = this.shuffleShoe.bind(this);
-    this.calculateDragon = this.calculateDragon.bind(this);
-    this.calculatePanda = this.calculatePanda.bind(this);
-    this.calculateTie = this.calculateTie.bind(this);
-    this.calculateHandWinner = this.calculateHandWinner.bind(this);
-    this.openCard = this.openCard.bind(this);
-    this.openHouseCard = this.openHouseCard.bind(this);
+    this.deal = this.deal.bind(this);
+    this.openPlayerCard = this.openCard.bind(this);
+    this.openBankerCard = this.openHouseCard.bind(this);
+    this.drawPlayerCard = this.drawPlayerCard.bind(this);
+    this.drawBankerCard = this.drawBankerCard.bind(this);
+    this.checkDragon = this.checkDragon.bind(this);
+    this.checkPanda = this.checkPanda.bind(this);
+    this.checkTie = this.checkTie.bind(this);
+    this.checkHandWinner = this.checkHandWinner.bind(this);
     this.resetBonus = this.resetBonus.bind(this);
+
   }
 
   componentDidMount(){
-    console.log("LOADED COMPONENT");
-    this.shuffleShoe();
+    if(this.state.shoe.size === 0){
+      this.shuffleShoe();
+    }
   }
 
 
-  this.fisherYatesShuffle(array){
+  fisherYatesShuffle(array){
     let d = array.length, t, i;
 
     while (d) {
@@ -51,17 +58,20 @@ export default class App extends Component<{}> {
     return array;
   }
 
-  this.shuffleShoe(){
-    let newShoe = [];
+  shuffleShoe(){
+    let newShoe = shoeOfCards;
     for(let i = 0; i < 8; i++){
-      newShoe.push(this.fisherYatesShuffle(deckOfCards.deck));
+      let newDeck = this.fisherYatesShuffle(deckOfCards.deck);
+      for(let j = 0; j < newDeck.length; j++){
+        newShoe.enqueue(newDeck[j]);
+      }
     }
     this.setState({
       shoe: newShoe
     }, () => console.log("NEW SHOE IS: ", newShoe));
   }
 
-  this.checkDragon(){
+  checkDragon(){
     if(this.bankerCards.length === 3 && this.bankerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0) === 7){
       this.setState({
         dragon: true,
@@ -73,7 +83,7 @@ export default class App extends Component<{}> {
     }
   }
 
-  this.checkPanda(){
+  checkPanda(){
     if(this.playerCards.length === 3 && this.playerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0) === 8){
       this.setState({
         panda: true,
@@ -85,7 +95,7 @@ export default class App extends Component<{}> {
     }
   }
 
-  this.checkTie(){
+  checkTie(){
     if(this.playerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0) && this.bankerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0)){
       this.setState({
         tie: true,
@@ -97,7 +107,7 @@ export default class App extends Component<{}> {
     }
   }
 
-  this.resetBonus(){
+  resetBonus(){
     this.setState({
       dragon: false,
       panda: false,
@@ -107,7 +117,7 @@ export default class App extends Component<{}> {
     });
   }
 
-  this.calculateHandWinner(){
+  checkHandWinner(){
     if(this.playerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0) > this.bankerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0)){
       this.checkPanda();
       if(this.state.panda === false){
@@ -135,12 +145,28 @@ export default class App extends Component<{}> {
     }
   }
 
-  this.openCard(){
-
+  drawPlayerCard(){
+    //make last moves also a a queue
+    //that notarizes who won and what
+    //results were
   }
 
-  this.openHouseCard(){
+  drawBankerCard(){
+    //make last moves also a queue
+    //that notorizes who won and what
+    //results were
+  }
 
+  deal(){
+    //dequeue the shoe queue
+  }
+
+  openPlayerCard(){
+    //change style property
+  }
+
+  openBankerCard(){
+    //change style property
   }
 
 
@@ -152,6 +178,35 @@ export default class App extends Component<{}> {
     );
   }
 }
+
+let Queue = () => {
+  this.count = 0;
+  this.container = {};
+};
+
+Queue.prototype.enqueue = function(q){
+  this.container[this.count] = q;
+  this.count++;
+};
+
+Queue.prototype.dequeue = function(){
+  let previouslyDealtHand = this.container[0];
+  delete this.container[0];
+  this.count--;
+
+  for(let i = 0; i < this.count; i++){
+    this.container[i] = this.container[i + 1];
+  }
+
+  return previouslyDealtHand;
+};
+
+
+Queue.prototype.size = function(){
+  return this.count >= 0 ? this.count : 0;
+};
+
+const shoeOfCards = new Queue();
 
 const deckOfCards = {
   deck: [
