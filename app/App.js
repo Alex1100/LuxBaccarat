@@ -77,7 +77,7 @@ export default class App extends Component<{}> {
         panda: false,
         playerWon: false,
         tie: false
-      }, () => this.resetBonus())
+      });
     }
   }
 
@@ -89,7 +89,7 @@ export default class App extends Component<{}> {
         dragon: false,
         bankerWon: false,
         tie: false
-      }, () => this.resetBonus())
+      });
     }
   }
 
@@ -101,7 +101,12 @@ export default class App extends Component<{}> {
         bankerWon: false,
         panda: false,
         playerWon: false
-      }, () => this.resetBonus())
+      }, () => {
+        //request some animation
+        //frame to disply
+        //winner
+        this.resetBonus();
+      });
     }
   }
 
@@ -125,7 +130,12 @@ export default class App extends Component<{}> {
           dragon: false
           bankerWon: false,
           tie: false,
-        }, () => this.resetBonus());
+        }, () => {
+          //request some animation
+          //frame to disply
+          //winner
+          this.resetBonus()
+        });
       }
     } else if(this.playerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0) < this.bankerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0)){
       this.checkDragon();
@@ -136,7 +146,12 @@ export default class App extends Component<{}> {
           panda: false,
           playerWon: false,
           tie: false
-        }, () => this.resetBonus());
+        }, () => {
+          //request some animation
+          //frame to disply
+          //winner
+          this.resetBonus()
+        });
       }
     } else {
       this.checkTie();
@@ -151,7 +166,7 @@ export default class App extends Component<{}> {
 
   drawBankerCard(){
     //make last moves also a queue
-    //that notorizes who won and what
+    //that notarizes who won and what
     //results were
   }
 
@@ -225,7 +240,7 @@ Queue.prototype.dequeue = function(){
 };
 
 Queue.prototype.size = function(){
-  return this.count >= 0 ? this.count : 0;
+  return this.count;
 };
 
 const shoeOfCards = new Queue();
