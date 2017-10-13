@@ -10,7 +10,7 @@ export default class App extends Component<{}> {
   constructor(props){
     super(props);
     this.state = {
-      shoe: [],
+      shoe: {},
       playerCards: [],
       bankerCards: [],
       lastMoves: []
@@ -37,7 +37,7 @@ export default class App extends Component<{}> {
   }
 
   componentDidMount(){
-    if(this.state.shoe.size === 0){
+    if(this.state.shoe.size === undefined || this.state.shoe.size === 0){
       this.shuffleShoe();
     }
   }
