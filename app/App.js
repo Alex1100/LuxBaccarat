@@ -22,7 +22,6 @@ export default class App extends Component<{}> {
       currentPlayers: ['Player1', 'Player2', 'Player3', 'Player4']
     }
 
-    this.createQueue = this.createQueue.bind(this);
     this.fisherYatesShuffle = this.fisherYatesShuffle.bind(this);
     this.shuffleShoe = this.shuffleShoe.bind(this);
     this.deal = this.deal.bind(this);
@@ -35,7 +34,6 @@ export default class App extends Component<{}> {
     this.checkTie = this.checkTie.bind(this);
     this.checkHandWinner = this.checkHandWinner.bind(this);
     this.resetBonus = this.resetBonus.bind(this);
-
   }
 
   componentDidMount(){
@@ -61,7 +59,7 @@ export default class App extends Component<{}> {
   shuffleShoe(){
     let newShoe = shoeOfCards;
     for(let i = 0; i < 8; i++){
-      let newDeck = this.fisherYatesShuffle(deckOfCards.deck);
+      let newDeck = this.fisherYatesShuffle(Object.values(deckOfCards.deck));
       for(let j = 0; j < newDeck.length; j++){
         newShoe.enqueue(newDeck[j]);
       }
@@ -179,7 +177,7 @@ export default class App extends Component<{}> {
   }
 }
 
-let Queue = () => {
+let Queue = function(){
   this.count = 0;
   this.container = {};
 };
@@ -209,7 +207,7 @@ Queue.prototype.size = function(){
 const shoeOfCards = new Queue();
 
 const deckOfCards = {
-  deck: [
+  deck: {
     'AH': ['AH', 1],
     'AS': ['AS', 1],
     'AC': ['AC', 1],
@@ -262,5 +260,5 @@ const deckOfCards = {
     'KS': ['KS', 0],
     'KC': ['KC', 0],
     'KD': ['KD', 0]
-  ]
+  }
 };
