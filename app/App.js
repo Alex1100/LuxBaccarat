@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
   Text,
   View
@@ -42,7 +41,6 @@ export default class App extends Component<{}> {
     }
   }
 
-
   fisherYatesShuffle(array){
     let d = array.length, t, i;
 
@@ -67,6 +65,86 @@ export default class App extends Component<{}> {
     this.setState({
       shoe: newShoe
     }, () => console.log("NEW SHOE IS: ", newShoe));
+  }
+
+  deal(){
+    this.setState({
+      playerCards: this.state.playerCards.push(this.state.shoe.getFirstInQueue()),
+      shoe: this.state.shoe.dequeue()
+    }, () => {
+      this.setState({
+        bankerCards: this.state.bankerCards.push(this.state.shoe.getFirstInQueue()),
+        shoe: this.state.shoe.dequeue()
+      }, () => {
+        this.setState({
+          playerCards: thist.state.playerCards.push(this.state.shoe.getFirstInQueue()),
+          shoe: this.state.shoe.dequeue()
+        }, () => {
+          this.setState({
+            bankerCards: this.state.bankerCards.push(this.state.shoe.getFirstInQueue()),
+            shoe: this.state.shoe.dequeue()
+          });
+        });
+      });
+    });
+  }
+
+  openPlayerCard(){
+    //change style property
+  }
+
+  openBankerCard(){
+    //change style property
+  }
+
+  drawPlayerCard(){
+    //make last moves also a a queue
+    //that notarizes who won and what
+    //results were
+  }
+
+  drawBankerCard(){
+    //make last moves also a queue
+    //that notarizes who won and what
+    //results were
+  }
+
+  checkHandWinner(){
+    if(this.playerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0) > this.bankerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0)){
+      this.checkPanda();
+      if(this.state.panda === false){
+        this.setState({
+          panda: false,
+          playerWon: true,
+          dragon: false
+          bankerWon: false,
+          tie: false,
+        }, () => {
+          //request some animation
+          //frame to disply
+          //winner
+          this.resetBonus()
+        });
+      }
+    } else if(this.playerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0) < this.bankerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0)){
+      this.checkDragon();
+      if(this.state.dragon === false){
+        this.setState({
+          bankerWon: true,
+          dragon: false,
+          panda: false,
+          playerWon: false,
+          tie: false
+        }, () => {
+          //request some animation
+          //frame to disply
+          //winner
+          this.resetBonus()
+        });
+      }
+    } else {
+      this.checkTie();
+    }
   }
 
   checkDragon(){
@@ -119,87 +197,6 @@ export default class App extends Component<{}> {
       bankerWon: false
     });
   }
-
-  checkHandWinner(){
-    if(this.playerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0) > this.bankerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0)){
-      this.checkPanda();
-      if(this.state.panda === false){
-        this.setState({
-          panda: false,
-          playerWon: true,
-          dragon: false
-          bankerWon: false,
-          tie: false,
-        }, () => {
-          //request some animation
-          //frame to disply
-          //winner
-          this.resetBonus()
-        });
-      }
-    } else if(this.playerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0) < this.bankerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0)){
-      this.checkDragon();
-      if(this.state.dragon === false){
-        this.setState({
-          bankerWon: true,
-          dragon: false,
-          panda: false,
-          playerWon: false,
-          tie: false
-        }, () => {
-          //request some animation
-          //frame to disply
-          //winner
-          this.resetBonus()
-        });
-      }
-    } else {
-      this.checkTie();
-    }
-  }
-
-  drawPlayerCard(){
-    //make last moves also a a queue
-    //that notarizes who won and what
-    //results were
-  }
-
-  drawBankerCard(){
-    //make last moves also a queue
-    //that notarizes who won and what
-    //results were
-  }
-
-  deal(){
-    this.setState({
-      playerCards: this.state.playerCards.push(this.state.shoe.getFirstInQueue()),
-      shoe: this.state.shoe.dequeue()
-    }, () => {
-      this.setState({
-        bankerCards: this.state.bankerCards.push(this.state.shoe.getFirstInQueue()),
-        shoe: this.state.shoe.dequeue()
-      }, () => {
-        this.setState({
-          playerCards: thist.state.playerCards.push(this.state.shoe.getFirstInQueue()),
-          shoe: this.state.shoe.dequeue()
-        }, () => {
-          this.setState({
-            bankerCards: this.state.bankerCards.push(this.state.shoe.getFirstInQueue()),
-            shoe: this.state.shoe.dequeue()
-          });
-        });
-      });
-    });
-  }
-
-  openPlayerCard(){
-    //change style property
-  }
-
-  openBankerCard(){
-    //change style property
-  }
-
 
   render() {
     return (
@@ -301,3 +298,10 @@ const deckOfCards = {
     'KD': ['KD', 0]
   }
 };
+
+const styles = {
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  }
+}
