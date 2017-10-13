@@ -156,7 +156,25 @@ export default class App extends Component<{}> {
   }
 
   deal(){
-    //dequeue the shoe queue
+    this.setState({
+      playerCards: this.state.playerCards.push(this.state.shoe.getFirstInQueue()),
+      shoe: this.state.shoe.dequeue()
+    }, () => {
+      this.setState({
+        bankerCards: this.state.bankerCards.push(this.state.shoe.getFirstInQueue()),
+        shoe: this.state.shoe.dequeue()
+      }, () => {
+        this.setState({
+          playerCards: thist.state.playerCards.push(this.state.shoe.getFirstInQueue()),
+          shoe: this.state.shoe.dequeue()
+        }, () => {
+          this.setState({
+            bankerCards: this.state.bankerCards.push(this.state.shoe.getFirstInQueue()),
+            shoe: this.state.shoe.dequeue()
+          });
+        });
+      });
+    });
   }
 
   openPlayerCard(){
@@ -177,28 +195,34 @@ export default class App extends Component<{}> {
   }
 }
 
-let Queue = function(){
+let Queue = function() {
   this.count = 0;
   this.container = {};
 };
 
-Queue.prototype.enqueue = function(q){
-  this.container[this.count] = q;
+Queue.prototype.enqueue = function(card){
+  this.container[this.count] = card;
   this.count++;
 };
 
+Queue.prototype.getFirstInQueue = function(){
+  return this.container[0];
+};
+
 Queue.prototype.dequeue = function(){
-  let previouslyDealtHand = this.container[0];
+  var removed = this.container[0];
   delete this.container[0];
   this.count--;
 
-  for(let i = 0; i < this.count; i++){
+  for(let i = 0; i < this.count + 1; i++){
     this.container[i] = this.container[i + 1];
+    if(this.container[i] === undefined){
+      delete this.container[i];
+    }
   }
 
-  return previouslyDealtHand;
+  return this.container;
 };
-
 
 Queue.prototype.size = function(){
   return this.count >= 0 ? this.count : 0;
