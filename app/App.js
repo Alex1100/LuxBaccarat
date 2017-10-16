@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
 
 export default class App extends Component<{}> {
@@ -12,20 +13,22 @@ export default class App extends Component<{}> {
       shoe: {},
       playerCards: [],
       bankerCards: [],
-      lastMoves: []
+      lastMoves: {},
       dragon: false,
       panda: false,
       tie: false,
       playerWon: false,
       bankerWon: false,
+      naturalPlayer: false,
+      naturalBanker: false,
       currentPlayers: ['Player1', 'Player2', 'Player3', 'Player4']
     }
 
     this.fisherYatesShuffle = this.fisherYatesShuffle.bind(this);
     this.shuffleShoe = this.shuffleShoe.bind(this);
     this.deal = this.deal.bind(this);
-    this.openPlayerCard = this.openCard.bind(this);
-    this.openBankerCard = this.openHouseCard.bind(this);
+    this.openPlayerCard = this.openPlayerCard.bind(this);
+    this.openBankerCard = this.openBankerCard.bind(this);
     this.drawPlayerCard = this.drawPlayerCard.bind(this);
     this.drawBankerCard = this.drawBankerCard.bind(this);
     this.checkDragon = this.checkDragon.bind(this);
@@ -163,23 +166,32 @@ export default class App extends Component<{}> {
     //7 or more then this function should
     //not fire off
 
-    //if the bankers first two cards
-    //total 0, 1, or 2, then the
-    //banker should draw a card
+    //if the player did not draw a third card
+    //aka if player has a natural
+    //and banker has two cards
+    //equalling 5 or less
 
+    //or
 
-    //If the bankers first two cards
-    //total 3, 4, 5, or 6,
-    //then whether the banker draws is
-    //determined by if the player has
-    //drawn an additional card
-    //so if the playerCards array length
-    //is greater than 2
-    //and also by what the actual value
-    //of the drawn player card was
-    //so if the players drawn card
-    //was
+    //1st possibilty
+    //players 3rd card: 0 || 1 || 9
+    //bankers hand: 3 or less
 
+    //2nd possibility
+    //players third card: 2 || 3
+    //bankers hand: 4 or less
+
+    //3rd possibility
+    //players third card: 4 || 5
+    //bankers hand: 5 or less
+
+    //4th possibility
+    //players third card: 6 || 7
+    //bankers hand: 6 or less
+
+    //5th possibility
+    //players third card: 8
+    //bankers hand: 2 or less
   }
 
   checkHandWinner(){
@@ -189,7 +201,7 @@ export default class App extends Component<{}> {
         this.setState({
           panda: false,
           playerWon: true,
-          dragon: false
+          dragon: false,
           bankerWon: false,
           tie: false,
         }, () => {
@@ -221,6 +233,7 @@ export default class App extends Component<{}> {
   }
 
   checkDragon(){
+    //pays 40 to 1
     if(this.bankerCards.length === 3 && this.bankerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0) === 7){
       this.setState({
         dragon: true,
@@ -233,10 +246,11 @@ export default class App extends Component<{}> {
   }
 
   checkPanda(){
+    //pays 25 to 1
     if(this.playerCards.length === 3 && this.playerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0) === 8){
       this.setState({
         panda: true,
-        playerWon: false,
+        playerWon: true,
         dragon: false,
         bankerWon: false,
         tie: false
@@ -245,6 +259,7 @@ export default class App extends Component<{}> {
   }
 
   checkTie(){
+    //pays 8 to 1
     if(this.playerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0) && this.bankerCards.map(el => el[1]).reduce((acc, next) => acc + next, 0)){
       this.setState({
         tie: true,
@@ -274,7 +289,35 @@ export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
-
+        <View style={bonusOptions.container}>
+          <View style={pandaStyle.container}>
+            <Image
+              style={{width: 50, height: 50, borderRadius: 25}}
+              source={require('../assets/images/panda_luxbaccarat.jpg')} />
+          </View>
+          <View style={tieStyle.container}>
+            <Text style={{color: 'white'}}>
+              Tie
+            </Text>
+          </View>
+          <View style={dragonStyle.container}>
+            <Image
+                style={{width: 50, height: 50, borderRadius: 25}}
+                source={require('../assets/images/dragon_board_luxbaccarat.jpg')} />
+          </View>
+        </View>
+        <View style={bankerPlayerWrapperStyles.container}>
+          <View>
+            <Text style={{color: 'red'}}>
+              Banker
+            </Text>
+          </View>
+          <View>
+            <Text style={{color: 'blue'}}>
+              Player
+            </Text>
+          </View>
+        </View>
       </View>
     );
   }
@@ -314,6 +357,8 @@ Queue.prototype.size = function(){
 };
 
 const shoeOfCards = new Queue();
+
+const outcomes = new Queue();
 
 const deckOfCards = {
   deck: {
@@ -375,6 +420,39 @@ const deckOfCards = {
 const styles = {
   container: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#296f60',
   }
 }
+
+const bonusOptions = {
+  container: {
+
+  },
+};
+
+const pandaStyle = {
+  container: {
+
+  },
+};
+
+const dragonStyle = {
+  container: {
+
+  },
+};
+
+const tieStyle = {
+  container: {
+
+  },
+};
+
+const bankerPlayerWrapperStyles = {
+  container: {
+
+  },
+};
+
+
