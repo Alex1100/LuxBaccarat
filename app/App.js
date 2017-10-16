@@ -308,13 +308,13 @@ export default class App extends Component<{}> {
             </View>
           </View>
           <View style={bankerPlayerWrapperStyles.container}>
-            <View>
-              <Text style={{color: 'red'}}>
+            <View style={bankerStyles.container}>
+              <Text style={bankerStyles.textStyle}>
                 Banker
               </Text>
             </View>
-            <View>
-              <Text style={{color: 'blue'}}>
+            <View style={playerStyles.container}>
+              <Text style={playerStyles.textStyle}>
                 Player
               </Text>
             </View>
@@ -440,6 +440,8 @@ const pandaStyle = {
     height: 45,
     paddingLeft: 4,
     borderRightWidth: 0.5,
+    borderTopWidth: 1,
+    borderLeftWidth: 1,
     borderBottomWidth: 1,
     borderColor: '#e2a643'
   },
@@ -459,6 +461,8 @@ const dragonStyle = {
     bottom: 90,
     paddingLeft: 4,
     borderLeftWidth: 0.5,
+    borderTopWidth: 1,
+    borderRightWidth: 1,
     borderBottomWidth: 1,
     borderColor: '#e2a643'
   },
@@ -480,6 +484,7 @@ const tieStyle = {
     borderLeftWidth: 0.5,
     borderBottomWidth: 1,
     borderRightWidth: 0.5,
+    borderTopWidth: 1,
     borderColor: '#e2a643'
   },
   textStyle: {
@@ -490,18 +495,55 @@ const tieStyle = {
 
 const bankerPlayerWrapperStyles = {
   container: {
-
+    justifyContent: 'center',
+    width: 150,
+    height: 155,
+    bottom: 90
   },
 };
 
 const betOptions = {
   container: {
-    backgroundColor: 'purple',
     margin: 115,
     top: 140,
     width: 150,
     height: 200
   },
 };
+
+const bankerStyles = {
+  container: {
+    width: 150,
+    height: 77.5,
+    borderBottomWidth: 0.5,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderColor: '#e2a643'
+  },
+  textStyle: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'red',
+    top: 17
+  }
+};
+
+const playerStyles = {
+  container: {
+    width: 150,
+    height: 77.5,
+    borderTopWidth: 0.5,
+    borderLeftWidth: 1,
+    borderBottomWidth: 1,
+    borderRightWidth: 1,
+    borderColor: '#e2a643'
+  },
+  textStyle: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'blue',
+    top: 17
+  }
+}
 
 
