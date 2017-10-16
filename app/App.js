@@ -56,12 +56,35 @@ export default class App extends Component<{}> {
 
   shuffleShoe(){
     let newShoe = shoeOfCards;
+    let firstCard;
+    let burnCount = 0;
     for(let i = 0; i < 8; i++){
       let newDeck = this.fisherYatesShuffle(Object.values(deckOfCards.deck));
       for(let j = 0; j < newDeck.length; j++){
+        if(i === 0 && j === 0){
+          if(
+              newDeck[i][0].slice(0, 2) === '10' ||
+              newDeck[i][0].slice(0, 2)[0] === 'J' ||
+              newDeck[i][0].slice(0, 2)[0] === 'Q' ||
+              newDeck[i][0].slice(0, 2)[0] === 'K'
+            ){
+              firstCard = newDeck[i][0];
+              burnCount = 10;
+            } else {
+              firstCard = newDeck[i][0];
+              burnCount = newDeck[i][1];
+            }
+        }
+
         newShoe.enqueue(newDeck[j]);
+
+        if(burnCount > 0){
+          newShoe.dequeue()
+          burnCount--;
+        }
       }
     }
+
     this.setState({
       shoe: newShoe
     }, () => console.log("NEW SHOE IS: ", newShoe));
@@ -91,22 +114,72 @@ export default class App extends Component<{}> {
 
   openPlayerCard(){
     //change style property
+    //need to account for
+    //what bets are placed
+    //if player bets placed then
+    //find the highest placed better
+    //and let them open the card
+    //once card is opened then switch
+    //style from one image to another
+    //image for the corresponding
+    //card dealt
   }
 
   openBankerCard(){
     //change style property
+    //need to account for
+    //what bets are placed
+    //if banker bets placed then
+    //find the highest placed better
+    //and let them open the card
+    //once card is opened then switch
+    //style from one image to another
+    //image for the corresponding
+    //card dealt
   }
 
   drawPlayerCard(){
     //make last moves also a a queue
     //that notarizes who won and what
     //results were
+
+    //if the players
+    //first two cards
+    //total 5 or less,
+    //then this function
+    //shoud fire off
+    //and deal an additional
+    //card and set state to push
+    //the new card in the
+    //playersCards array
   }
 
   drawBankerCard(){
     //make last moves also a queue
     //that notarizes who won and what
     //results were
+
+    //if the bankers first two cards total
+    //7 or more then this function should
+    //not fire off
+
+    //if the bankers first two cards
+    //total 0, 1, or 2, then the
+    //banker should draw a card
+
+
+    //If the bankers first two cards
+    //total 3, 4, 5, or 6,
+    //then whether the banker draws is
+    //determined by if the player has
+    //drawn an additional card
+    //so if the playerCards array length
+    //is greater than 2
+    //and also by what the actual value
+    //of the drawn player card was
+    //so if the players drawn card
+    //was
+
   }
 
   checkHandWinner(){
