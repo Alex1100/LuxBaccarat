@@ -2,4 +2,4 @@
 
 
 **Currently in Development**
-![screenshot](assets/images/alpha_stage_luxbaccarat_1.png)
+<img src="./assets/images/alpha_stage_luxbaccarat_1.png" width="300" height="300"/>
