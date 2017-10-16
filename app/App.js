@@ -289,33 +289,35 @@ export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
-        <View style={bonusOptions.container}>
-          <View style={pandaStyle.container}>
-            <Image
-              style={{width: 50, height: 50, borderRadius: 25}}
-              source={require('../assets/images/panda_luxbaccarat.jpg')} />
+        <View style={betOptions.container}>
+          <View style={bonusOptions.container}>
+            <View style={pandaStyle.container}>
+              <Image
+                style={pandaStyle.image}
+                source={require('../assets/images/panda_luxbaccarat.jpg')} />
+            </View>
+            <View style={tieStyle.container}>
+              <Text style={tieStyle.textStyle}>
+                TIE
+              </Text>
+            </View>
+            <View style={dragonStyle.container}>
+              <Image
+                  style={dragonStyle.image}
+                  source={require('../assets/images/dragon_board_luxbaccarat.jpg')} />
+            </View>
           </View>
-          <View style={tieStyle.container}>
-            <Text style={{color: 'white'}}>
-              Tie
-            </Text>
-          </View>
-          <View style={dragonStyle.container}>
-            <Image
-                style={{width: 50, height: 50, borderRadius: 25}}
-                source={require('../assets/images/dragon_board_luxbaccarat.jpg')} />
-          </View>
-        </View>
-        <View style={bankerPlayerWrapperStyles.container}>
-          <View>
-            <Text style={{color: 'red'}}>
-              Banker
-            </Text>
-          </View>
-          <View>
-            <Text style={{color: 'blue'}}>
-              Player
-            </Text>
+          <View style={bankerPlayerWrapperStyles.container}>
+            <View>
+              <Text style={{color: 'red'}}>
+                Banker
+              </Text>
+            </View>
+            <View>
+              <Text style={{color: 'blue'}}>
+                Player
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -433,25 +435,72 @@ const bonusOptions = {
 
 const pandaStyle = {
   container: {
-
+    justifyContent: 'center',
+    width: 45,
+    height: 45,
+    paddingLeft: 4,
+    borderRightWidth: 0.5,
+    borderBottomWidth: 1,
+    borderColor: '#e2a643'
   },
+  image: {
+    width: 35,
+    height: 35,
+    borderRadius: 17.5
+  }
 };
 
 const dragonStyle = {
   container: {
-
+    justifyContent: 'center',
+    width: 45,
+    height: 45,
+    left: 105,
+    bottom: 90,
+    paddingLeft: 4,
+    borderLeftWidth: 0.5,
+    borderBottomWidth: 1,
+    borderColor: '#e2a643'
   },
+  image: {
+    width: 35,
+    height: 35,
+    borderRadius: 17.5,
+    justifyContent: 'flex-start'
+  }
 };
 
 const tieStyle = {
   container: {
-
+    justifyContent: 'center',
+    width: 60,
+    height: 45,
+    bottom: 45,
+    left: 45,
+    borderLeftWidth: 0.5,
+    borderBottomWidth: 1,
+    borderRightWidth: 0.5,
+    borderColor: '#e2a643'
   },
+  textStyle: {
+    color: 'white',
+    textAlign: 'center'
+  }
 };
 
 const bankerPlayerWrapperStyles = {
   container: {
 
+  },
+};
+
+const betOptions = {
+  container: {
+    backgroundColor: 'purple',
+    margin: 115,
+    top: 140,
+    width: 150,
+    height: 200
   },
 };
 
