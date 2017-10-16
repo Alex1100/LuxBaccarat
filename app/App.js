@@ -518,12 +518,13 @@ const bankerStyles = {
     borderBottomWidth: 0.5,
     borderLeftWidth: 1,
     borderRightWidth: 1,
+    backgroundColor: '#a32c2e',
     borderColor: '#e2a643'
   },
   textStyle: {
     textAlign: 'center',
     fontSize: 30,
-    color: 'red',
+    color: '#e2a643',
     top: 17
   }
 };
@@ -536,12 +537,13 @@ const playerStyles = {
     borderLeftWidth: 1,
     borderBottomWidth: 1,
     borderRightWidth: 1,
-    borderColor: '#e2a643'
+    borderColor: '#e2a643',
+    backgroundColor: '#1c63ba'
   },
   textStyle: {
     textAlign: 'center',
     fontSize: 30,
-    color: 'blue',
+    color: '#e2a643',
     top: 17
   }
 }
