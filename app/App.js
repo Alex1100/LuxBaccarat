@@ -304,6 +304,18 @@ export default class App extends Component<{}> {
             </View>
           : <View><Text>HEYYY</Text></View>
         }
+        <View style={cardDisplay.container}>
+          <View style={displayPlayer.container}>
+            <Text style={displayPlayer.textStyle}>
+              Player
+            </Text>
+          </View>
+          <View style={displayBanker.container}>
+            <Text style={displayBanker.textStyle}>
+              Banker
+            </Text>
+          </View>
+        </View>
         <View style={betOptions.container}>
           <View style={bonusOptions.container}>
             <View style={pandaStyle.container}>
@@ -434,6 +446,64 @@ const deckOfCards = {
   }
 };
 
+const cardDisplay = {
+  container: {
+    justifyContent: 'center',
+    width: 279,
+    height: 120,
+    top: 100,
+    left: 47.5,
+    // borderRightWidth: 1,
+    // borderLeftWidth: 1,
+    // borderBottomWidth: 1,
+    // borderTopWidth: 1,
+    // borderBottomLeftRadius: 30,
+    // borderBottomRightRadius: 30,
+    // borderBottomColor: '#e2a643',
+    // borderColor: '#e2a643',
+    opacity: 0.7
+  }
+}
+
+const displayPlayer = {
+  container: {
+    width: 140,
+    height: 120,
+    top: 60,
+    borderRightWidth: 2,
+    borderColor: '#e2a643',
+  },
+  textStyle: {
+    textAlign: 'center',
+    color: '#1c63ba',
+    fontSize: 40,
+    fontStyle: 'italic',
+    textShadowColor: 'white',
+    textShadowRadius: 2,
+    textShadowOffset: {width: 2, height: 2}
+  }
+}
+
+const displayBanker = {
+  container: {
+    width: 140,
+    height: 120,
+    bottom: 60,
+    left: 139,
+    borderLeftWidth: 2,
+    borderColor: '#e2a643',
+  },
+  textStyle: {
+    textAlign: 'center',
+    color: '#a32c2e',
+    fontSize: 40,
+    fontStyle: 'italic',
+    textShadowColor: 'white',
+    textShadowRadius: 2,
+    textShadowOffset: {width: 2, height: 2}
+  }
+}
+
 const styles = {
   container: {
     flex: 1,
@@ -444,7 +514,8 @@ const styles = {
 
 const bonusOptions = {
   container: {
-
+    justifyContent: 'center',
+    bottom: 100,
   },
 };
 
@@ -458,7 +529,7 @@ const pandaStyle = {
     borderTopWidth: 1,
     borderLeftWidth: 1,
     borderBottomWidth: 1,
-    borderColor: '#e2a643'
+    borderColor: '#e2a643',
   },
   image: {
     width: 35,
@@ -513,7 +584,7 @@ const bankerPlayerWrapperStyles = {
     justifyContent: 'center',
     width: 150,
     height: 155,
-    bottom: 90
+    bottom: 190
   },
 };
 
