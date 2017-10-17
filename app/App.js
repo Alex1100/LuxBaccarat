@@ -10,7 +10,7 @@ export default class App extends Component<{}> {
   constructor(props){
     super(props);
     this.state = {
-      shoe: {},
+      shoe: [],
       playerCards: [],
       bankerCards: [],
       lastMoves: {},
@@ -38,8 +38,8 @@ export default class App extends Component<{}> {
     this.resetBonus = this.resetBonus.bind(this);
   }
 
-  componentDidMount(){
-    if(this.state.shoe.size === undefined || this.state.shoe.size === 0){
+  componentWillMount(){
+    if(this.state.shoe.length === 0){
       this.shuffleShoe();
     }
   }
@@ -289,6 +289,21 @@ export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
+        {this.state.shoe.size() > 0 ?
+            <View style={cards.container}>
+              <View style={firstCard.container}>
+              {
+                Object.values(this.state.shoe.container).slice(0, 52).map((element, index) => (
+                    <Image
+                      key={index}
+                      style={card[`card${index}`]}
+                      source={require('../assets/images/card_back.png')} />
+                ))
+              }
+              </View>
+            </View>
+          : <View><Text>HEYYY</Text></View>
+        }
         <View style={betOptions.container}>
           <View style={bonusOptions.container}>
             <View style={pandaStyle.container}>
@@ -321,7 +336,7 @@ export default class App extends Component<{}> {
           </View>
         </View>
       </View>
-    );
+    )
   }
 }
 
@@ -546,6 +561,1697 @@ const playerStyles = {
     color: '#e2a643',
     top: 17
   }
+};
+
+const cards = {
+  container: {
+    left: 200,
+    bottom: 50,
+    width: 170,
+    marginTop: 100,
+    right: 400,
+    backgroundColor: 'orange',
+  }
+}
+
+const firstCard = {
+  container: {
+    flex: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    height: 70
+  }
+}
+
+const card = {
+  container: {
+    height: 70,
+  },
+  card0: {
+    width: 50,
+    height: 70
+  },
+  card1: {
+    width: 2,
+    height: 70
+  },
+  card2: {
+    width: 2,
+    height: 70
+  },
+  card3: {
+    width: 2,
+    height: 70
+  },
+  card4: {
+    width: 2,
+    height: 70
+  },
+  card5: {
+    width: 2,
+    height: 70
+  },
+  card6: {
+    width: 2,
+    height: 70
+  },
+  card7: {
+    width: 2,
+    height: 70
+  },
+  card8: {
+    width: 2,
+    height: 70
+  },
+  card9: {
+    width: 2,
+    height: 70
+  },
+  card10: {
+    width: 2,
+    height: 70
+  },
+  card11: {
+    width: 2,
+    height: 70
+  },
+  card12: {
+    width: 2,
+    height: 70
+  },
+  card13: {
+    width: 2,
+    height: 70
+  },
+  card14: {
+    width: 2,
+    height: 70
+  },
+  card15: {
+    width: 2,
+    height: 70
+  },
+  card16: {
+    width: 2,
+    height: 70
+  },
+  card17: {
+    width: 2,
+    height: 70
+  },
+  card18: {
+    width: 2,
+    height: 70
+  },
+  card19: {
+    width: 2,
+    height: 70
+  },
+  card20: {
+    width: 2,
+    height: 70
+  },
+  card21: {
+    width: 2,
+    height: 70
+  },
+  card22: {
+    width: 2,
+    height: 70
+  },
+  card23: {
+    width: 2,
+    height: 70
+  },
+  card24: {
+    width: 2,
+    height: 70
+  },
+  card25: {
+    width: 2,
+    height: 70
+  },
+  card26: {
+    width: 2,
+    height: 70
+  },
+  card27: {
+    width: 2,
+    height: 70
+  },
+  card28: {
+    width: 2,
+    height: 70
+  },
+  card29: {
+    width: 2,
+    height: 70
+  },
+  card30: {
+    width: 2,
+    height: 70
+  },
+  card31: {
+    width: 2,
+    height: 70
+  },
+  card32: {
+    width: 2,
+    height: 70
+  },
+  card33: {
+    width: 2,
+    height: 70
+  },
+  card34: {
+    width: 2,
+    height: 70
+  },
+  card35: {
+    width: 2,
+    height: 70
+  },
+  card36: {
+    width: 2,
+    height: 70
+  },
+  card37: {
+    width: 2,
+    height: 70
+  },
+  card38: {
+    width: 2,
+    height: 70
+  },
+  card39: {
+    width: 2,
+    height: 70
+  },
+  card40: {
+    width: 2,
+    height: 70
+  },
+  card41: {
+    width: 2,
+    height: 70
+  },
+  card42: {
+    width: 2,
+    height: 70
+  },
+  card43: {
+    width: 2,
+    height: 70
+  },
+  card44: {
+    width: 2,
+    height: 70
+  },
+  card45: {
+    width: 2,
+    height: 70
+  },
+  card46: {
+    width: 2,
+    height: 70
+  },
+  card47: {
+    width: 2,
+    height: 70
+  },
+  card48: {
+    width: 2,
+    height: 70
+  },
+  card49: {
+    width: 2,
+    height: 70
+  },
+  card50: {
+    width: 2,
+    height: 70
+  },
+  card51: {
+    width: 2,
+    height: 70
+  },
+  card52: {
+    width: 2,
+    height: 70
+  },
+  card53: {
+    width: 2,
+    height: 70
+  },
+  card54: {
+    width: 2,
+    height: 70
+  },
+  card55: {
+    width: 2,
+    height: 70
+  },
+  card56: {
+    width: 2,
+    height: 70
+  },
+  card57: {
+    width: 2,
+    height: 70
+  },
+  card58: {
+    width: 2,
+    height: 70
+  },
+  card59: {
+    width: 2,
+    height: 70
+  },
+  card60: {
+    width: 2,
+    height: 70
+  },
+  card61: {
+    width: 2,
+    height: 70
+  },
+  card62: {
+    width: 2,
+    height: 70
+  },
+  card63: {
+    width: 2,
+    height: 70
+  },
+  card64: {
+    width: 2,
+    height: 70
+  },
+  card65: {
+    width: 2,
+    height: 70
+  },
+  card66: {
+    width: 2,
+    height: 70
+  },
+  card67: {
+    width: 2,
+    height: 70
+  },
+  card68: {
+    width: 2,
+    height: 70
+  },
+  card69: {
+    width: 2,
+    height: 70
+  },
+  card70: {
+    width: 2,
+    height: 70
+  },
+  card71: {
+    width: 2,
+    height: 70
+  },
+  card72: {
+    width: 2,
+    height: 70
+  },
+  card73: {
+    width: 2,
+    height: 70
+  },
+  card74: {
+    width: 2,
+    height: 70
+  },
+  card75: {
+    width: 2,
+    height: 70
+  },
+  card76: {
+    width: 2,
+    height: 70
+  },
+  card77: {
+    width: 2,
+    height: 70
+  },
+  card78: {
+    width: 2,
+    height: 70
+  },
+  card79: {
+    width: 2,
+    height: 70
+  },
+  card80: {
+    width: 2,
+    height: 70
+  },
+  card81: {
+    width: 2,
+    height: 70
+  },
+  card82: {
+    width: 2,
+    height: 70
+  },
+  card83: {
+    width: 2,
+    height: 70
+  },
+  card84: {
+    width: 2,
+    height: 70
+  },
+  card85: {
+    width: 2,
+    height: 70
+  },
+  card86: {
+    width: 2,
+    height: 70
+  },
+  card87: {
+    width: 2,
+    height: 70
+  },
+  card88: {
+    width: 2,
+    height: 70
+  },
+  card89: {
+    width: 2,
+    height: 70
+  },
+  card90: {
+    width: 2,
+    height: 70
+  },
+  card91: {
+    width: 2,
+    height: 70
+  },
+  card92: {
+    width: 2,
+    height: 70
+  },
+  card93: {
+    width: 2,
+    height: 70
+  },
+  card94: {
+    width: 2,
+    height: 70
+  },
+  card95: {
+    width: 2,
+    height: 70
+  },
+  card96: {
+    width: 2,
+    height: 70
+  },
+  card97: {
+    width: 2,
+    height: 70
+  },
+  card98: {
+    width: 2,
+    height: 70
+  },
+  card99: {
+    width: 2,
+    height: 70
+  },
+  card100: {
+    width: 2,
+    height: 70
+  },
+  card101: {
+    width: 2,
+    height: 70
+  },
+  card102: {
+    width: 2,
+    height: 70
+  },
+  card103: {
+    width: 2,
+    height: 70
+  },
+  card104: {
+    width: 2,
+    height: 70
+  },
+  card105: {
+    width: 2,
+    height: 70
+  },
+  card106: {
+    width: 2,
+    height: 70
+  },
+  card107: {
+    width: 2,
+    height: 70
+  },
+  card108: {
+    width: 2,
+    height: 70
+  },
+  card109: {
+    width: 2,
+    height: 70
+  },
+  card110: {
+    width: 2,
+    height: 70
+  },
+  card111: {
+    width: 2,
+    height: 70
+  },
+  card112: {
+    width: 2,
+    height: 70
+  },
+  card113: {
+    width: 2,
+    height: 70
+  },
+  card114: {
+    width: 2,
+    height: 70
+  },
+  card115: {
+    width: 2,
+    height: 70
+  },
+  card116: {
+    width: 2,
+    height: 70
+  },
+  card117: {
+    width: 2,
+    height: 70
+  },
+  card118: {
+    width: 2,
+    height: 70
+  },
+  card119: {
+    width: 2,
+    height: 70
+  },
+  card120: {
+    width: 2,
+    height: 70
+  },
+  card121: {
+    width: 2,
+    height: 70
+  },
+  card122: {
+    width: 2,
+    height: 70
+  },
+  card123: {
+    width: 2,
+    height: 70
+  },
+  card124: {
+    width: 2,
+    height: 70
+  },
+  card125: {
+    width: 2,
+    height: 70
+  },
+  card126: {
+    width: 2,
+    height: 70
+  },
+  card127: {
+    width: 2,
+    height: 70
+  },
+  card128: {
+    width: 2,
+    height: 70
+  },
+  card129: {
+    width: 2,
+    height: 70
+  },
+  card130: {
+    width: 2,
+    height: 70
+  },
+  card131: {
+    width: 2,
+    height: 70
+  },
+  card132: {
+    width: 2,
+    height: 70
+  },
+  card133: {
+    width: 2,
+    height: 70
+  },
+  card134: {
+    width: 2,
+    height: 70
+  },
+  card135: {
+    width: 2,
+    height: 70
+  },
+  card136: {
+    width: 2,
+    height: 70
+  },
+  card137: {
+    width: 2,
+    height: 70
+  },
+  card138: {
+    width: 2,
+    height: 70
+  },
+  card139: {
+    width: 2,
+    height: 70
+  },
+  card140: {
+    width: 2,
+    height: 70
+  },
+  card141: {
+    width: 2,
+    height: 70
+  },
+  card142: {
+    width: 2,
+    height: 70
+  },
+  card143: {
+    width: 2,
+    height: 70
+  },
+  card144: {
+    width: 2,
+    height: 70
+  },
+  card145: {
+    width: 2,
+    height: 70
+  },
+  card146: {
+    width: 2,
+    height: 70
+  },
+  card147: {
+    width: 2,
+    height: 70
+  },
+  card148: {
+    width: 2,
+    height: 70
+  },
+  card149: {
+    width: 2,
+    height: 70
+  },
+  card150: {
+    width: 2,
+    height: 70
+  },
+  card151: {
+    width: 2,
+    height: 70
+  },
+  card152: {
+    width: 2,
+    height: 70
+  },
+  card153: {
+    width: 2,
+    height: 70
+  },
+  card154: {
+    width: 2,
+    height: 70
+  },
+  card155: {
+    width: 2,
+    height: 70
+  },
+  card156: {
+    width: 2,
+    height: 70
+  },
+  card157: {
+    width: 2,
+    height: 70
+  },
+  card158: {
+    width: 2,
+    height: 70
+  },
+  card159: {
+    width: 2,
+    height: 70
+  },
+  card160: {
+    width: 2,
+    height: 70
+  },
+  card161: {
+    width: 2,
+    height: 70
+  },
+  card162: {
+    width: 2,
+    height: 70
+  },
+  card163: {
+    width: 2,
+    height: 70
+  },
+  card164: {
+    width: 2,
+    height: 70
+  },
+  card165: {
+    width: 2,
+    height: 70
+  },
+  card166: {
+    width: 2,
+    height: 70
+  },
+  card167: {
+    width: 2,
+    height: 70
+  },
+  card168: {
+    width: 2,
+    height: 70
+  },
+  card169: {
+    width: 2,
+    height: 70
+  },
+  card170: {
+    width: 2,
+    height: 70
+  },
+  card171: {
+    width: 2,
+    height: 70
+  },
+  card172: {
+    width: 2,
+    height: 70
+  },
+  card173: {
+    width: 2,
+    height: 70
+  },
+  card174: {
+    width: 2,
+    height: 70
+  },
+  card175: {
+    width: 2,
+    height: 70
+  },
+  card176: {
+    width: 2,
+    height: 70
+  },
+  card177: {
+    width: 2,
+    height: 70
+  },
+  card178: {
+    width: 2,
+    height: 70
+  },
+  card179: {
+    width: 2,
+    height: 70
+  },
+  card180: {
+    width: 2,
+    height: 70
+  },
+  card181: {
+    width: 2,
+    height: 70
+  },
+  card182: {
+    width: 2,
+    height: 70
+  },
+  card183: {
+    width: 2,
+    height: 70
+  },
+  card184: {
+    width: 2,
+    height: 70
+  },
+  card185: {
+    width: 2,
+    height: 70
+  },
+  card186: {
+    width: 2,
+    height: 70
+  },
+  card187: {
+    width: 2,
+    height: 70
+  },
+  card188: {
+    width: 2,
+    height: 70
+  },
+  card189: {
+    width: 2,
+    height: 70
+  },
+  card190: {
+    width: 2,
+    height: 70
+  },
+  card191: {
+    width: 2,
+    height: 70
+  },
+  card192: {
+    width: 2,
+    height: 70
+  },
+  card193: {
+    width: 2,
+    height: 70
+  },
+  card194: {
+    width: 2,
+    height: 70
+  },
+  card195: {
+    width: 2,
+    height: 70
+  },
+  card196: {
+    width: 2,
+    height: 70
+  },
+  card197: {
+    width: 2,
+    height: 70
+  },
+  card198: {
+    width: 2,
+    height: 70
+  },
+  card199: {
+    width: 2,
+    height: 70
+  },
+  card200: {
+    width: 2,
+    height: 70
+  },
+  card201: {
+    width: 2,
+    height: 70
+  },
+  card202: {
+    width: 2,
+    height: 70
+  },
+  card203: {
+    width: 2,
+    height: 70
+  },
+  card204: {
+    width: 2,
+    height: 70
+  },
+  card205: {
+    width: 2,
+    height: 70
+  },
+  card206: {
+    width: 2,
+    height: 70
+  },
+  card207: {
+    width: 2,
+    height: 70
+  },
+  card208: {
+    width: 2,
+    height: 70
+  },
+  card209: {
+    width: 2,
+    height: 70
+  },
+  card210: {
+    width: 2,
+    height: 70
+  },
+  card211: {
+    width: 2,
+    height: 70
+  },
+  card212: {
+    width: 2,
+    height: 70
+  },
+  card213: {
+    width: 2,
+    height: 70
+  },
+  card214: {
+    width: 2,
+    height: 70
+  },
+  card215: {
+    width: 2,
+    height: 70
+  },
+  card216: {
+    width: 2,
+    height: 70
+  },
+  card217: {
+    width: 2,
+    height: 70
+  },
+  card218: {
+    width: 2,
+    height: 70
+  },
+  card219: {
+    width: 2,
+    height: 70
+  },
+  card220: {
+    width: 2,
+    height: 70
+  },
+  card221: {
+    width: 2,
+    height: 70
+  },
+  card222: {
+    width: 2,
+    height: 70
+  },
+  card223: {
+    width: 2,
+    height: 70
+  },
+  card224: {
+    width: 2,
+    height: 70
+  },
+  card225: {
+    width: 2,
+    height: 70
+  },
+  card226: {
+    width: 2,
+    height: 70
+  },
+  card227: {
+    width: 2,
+    height: 70
+  },
+  card228: {
+    width: 2,
+    height: 70
+  },
+  card229: {
+    width: 2,
+    height: 70
+  },
+  card230: {
+    width: 2,
+    height: 70
+  },
+  card231: {
+    width: 2,
+    height: 70
+  },
+  card232: {
+    width: 2,
+    height: 70
+  },
+  card233: {
+    width: 2,
+    height: 70
+  },
+  card234: {
+    width: 2,
+    height: 70
+  },
+  card235: {
+    width: 2,
+    height: 70
+  },
+  card236: {
+    width: 2,
+    height: 70
+  },
+  card237: {
+    width: 2,
+    height: 70
+  },
+  card238: {
+    width: 2,
+    height: 70
+  },
+  card239: {
+    width: 2,
+    height: 70
+  },
+  card240: {
+    width: 2,
+    height: 70
+  },
+  card241: {
+    width: 2,
+    height: 70
+  },
+  card242: {
+    width: 2,
+    height: 70
+  },
+  card243: {
+    width: 2,
+    height: 70
+  },
+  card244: {
+    width: 2,
+    height: 70
+  },
+  card245: {
+    width: 2,
+    height: 70
+  },
+  card246: {
+    width: 2,
+    height: 70
+  },
+  card247: {
+    width: 2,
+    height: 70
+  },
+  card248: {
+    width: 2,
+    height: 70
+  },
+  card249: {
+    width: 2,
+    height: 70
+  },
+  card250: {
+    width: 2,
+    height: 70
+  },
+  card251: {
+    width: 2,
+    height: 70
+  },
+  card252: {
+    width: 2,
+    height: 70
+  },
+  card253: {
+    width: 2,
+    height: 70
+  },
+  card254: {
+    width: 2,
+    height: 70
+  },
+  card255: {
+    width: 2,
+    height: 70
+  },
+  card256: {
+    width: 2,
+    height: 70
+  },
+  card257: {
+    width: 2,
+    height: 70
+  },
+  card258: {
+    width: 2,
+    height: 70
+  },
+  card259: {
+    width: 2,
+    height: 70
+  },
+  card260: {
+    width: 2,
+    height: 70
+  },
+  card261: {
+    width: 2,
+    height: 70
+  },
+  card262: {
+    width: 2,
+    height: 70
+  },
+  card263: {
+    width: 2,
+    height: 70
+  },
+  card264: {
+    width: 2,
+    height: 70
+  },
+  card265: {
+    width: 2,
+    height: 70
+  },
+  card266: {
+    width: 2,
+    height: 70
+  },
+  card267: {
+    width: 2,
+    height: 70
+  },
+  card268: {
+    width: 2,
+    height: 70
+  },
+  card269: {
+    width: 2,
+    height: 70
+  },
+  card270: {
+    width: 2,
+    height: 70
+  },
+  card271: {
+    width: 2,
+    height: 70
+  },
+  card272: {
+    width: 2,
+    height: 70
+  },
+  card273: {
+    width: 2,
+    height: 70
+  },
+  card274: {
+    width: 2,
+    height: 70
+  },
+  card275: {
+    width: 2,
+    height: 70
+  },
+  card276: {
+    width: 2,
+    height: 70
+  },
+  card277: {
+    width: 2,
+    height: 70
+  },
+  card278: {
+    width: 2,
+    height: 70
+  },
+  card279: {
+    width: 2,
+    height: 70
+  },
+  card280: {
+    width: 2,
+    height: 70
+  },
+  card281: {
+    width: 2,
+    height: 70
+  },
+  card282: {
+    width: 2,
+    height: 70
+  },
+  card283: {
+    width: 2,
+    height: 70
+  },
+  card284: {
+    width: 2,
+    height: 70
+  },
+  card285: {
+    width: 2,
+    height: 70
+  },
+  card286: {
+    width: 2,
+    height: 70
+  },
+  card287: {
+    width: 2,
+    height: 70
+  },
+  card288: {
+    width: 2,
+    height: 70
+  },
+  card289: {
+    width: 2,
+    height: 70
+  },
+  card290: {
+    width: 2,
+    height: 70
+  },
+  card291: {
+    width: 2,
+    height: 70
+  },
+  card292: {
+    width: 2,
+    height: 70
+  },
+  card293: {
+    width: 2,
+    height: 70
+  },
+  card294: {
+    width: 2,
+    height: 70
+  },
+  card295: {
+    width: 2,
+    height: 70
+  },
+  card296: {
+    width: 2,
+    height: 70
+  },
+  card297: {
+    width: 2,
+    height: 70
+  },
+  card298: {
+    width: 2,
+    height: 70
+  },
+  card299: {
+    width: 2,
+    height: 70
+  },
+  card300: {
+    width: 2,
+    height: 70
+  },
+  card301: {
+    width: 2,
+    height: 70
+  },
+  card302: {
+    width: 2,
+    height: 70
+  },
+  card303: {
+    width: 2,
+    height: 70
+  },
+  card304: {
+    width: 2,
+    height: 70
+  },
+  card305: {
+    width: 2,
+    height: 70
+  },
+  card306: {
+    width: 2,
+    height: 70
+  },
+  card307: {
+    width: 2,
+    height: 70
+  },
+  card308: {
+    width: 2,
+    height: 70
+  },
+  card309: {
+    width: 2,
+    height: 70
+  },
+  card310: {
+    width: 2,
+    height: 70
+  },
+  card311: {
+    width: 2,
+    height: 70
+  },
+  card312: {
+    width: 2,
+    height: 70
+  },
+  card313: {
+    width: 2,
+    height: 70
+  },
+  card314: {
+    width: 2,
+    height: 70
+  },
+  card315: {
+    width: 2,
+    height: 70
+  },
+  card316: {
+    width: 2,
+    height: 70
+  },
+  card317: {
+    width: 2,
+    height: 70
+  },
+  card318: {
+    width: 2,
+    height: 70
+  },
+  card319: {
+    width: 2,
+    height: 70
+  },
+  card320: {
+    width: 2,
+    height: 70
+  },
+  card321: {
+    width: 2,
+    height: 70
+  },
+  card322: {
+    width: 2,
+    height: 70
+  },
+  card323: {
+    width: 2,
+    height: 70
+  },
+  card324: {
+    width: 2,
+    height: 70
+  },
+  card325: {
+    width: 2,
+    height: 70
+  },
+  card326: {
+    width: 2,
+    height: 70
+  },
+  card327: {
+    width: 2,
+    height: 70
+  },
+  card328: {
+    width: 2,
+    height: 70
+  },
+  card329: {
+    width: 2,
+    height: 70
+  },
+  card330: {
+    width: 2,
+    height: 70
+  },
+  card331: {
+    width: 2,
+    height: 70
+  },
+  card332: {
+    width: 2,
+    height: 70
+  },
+  card333: {
+    width: 2,
+    height: 70
+  },
+  card334: {
+    width: 2,
+    height: 70
+  },
+  card335: {
+    width: 2,
+    height: 70
+  },
+  card336: {
+    width: 2,
+    height: 70
+  },
+  card337: {
+    width: 2,
+    height: 70
+  },
+  card338: {
+    width: 2,
+    height: 70
+  },
+  card339: {
+    width: 2,
+    height: 70
+  },
+  card340: {
+    width: 2,
+    height: 70
+  },
+  card341: {
+    width: 2,
+    height: 70
+  },
+  card342: {
+    width: 2,
+    height: 70
+  },
+  card343: {
+    width: 2,
+    height: 70
+  },
+  card344: {
+    width: 2,
+    height: 70
+  },
+  card345: {
+    width: 2,
+    height: 70
+  },
+  card346: {
+    width: 2,
+    height: 70
+  },
+  card347: {
+    width: 2,
+    height: 70
+  },
+  card348: {
+    width: 2,
+    height: 70
+  },
+  card349: {
+    width: 2,
+    height: 70
+  },
+  card350: {
+    width: 2,
+    height: 70
+  },
+  card351: {
+    width: 2,
+    height: 70
+  },
+  card352: {
+    width: 2,
+    height: 70
+  },
+  card353: {
+    width: 2,
+    height: 70
+  },
+  card354: {
+    width: 2,
+    height: 70
+  },
+  card355: {
+    width: 2,
+    height: 70
+  },
+  card356: {
+    width: 2,
+    height: 70
+  },
+  card357: {
+    width: 2,
+    height: 70
+  },
+  card358: {
+    width: 2,
+    height: 70
+  },
+  card359: {
+    width: 2,
+    height: 70
+  },
+  card360: {
+    width: 2,
+    height: 70
+  },
+  card361: {
+    width: 2,
+    height: 70
+  },
+  card362: {
+    width: 2,
+    height: 70
+  },
+  card363: {
+    width: 2,
+    height: 70
+  },
+  card364: {
+    width: 2,
+    height: 70
+  },
+  card365: {
+    width: 2,
+    height: 70
+  },
+  card366: {
+    width: 2,
+    height: 70
+  },
+  card367: {
+    width: 2,
+    height: 70
+  },
+  card368: {
+    width: 2,
+    height: 70
+  },
+  card369: {
+    width: 2,
+    height: 70
+  },
+  card370: {
+    width: 2,
+    height: 70
+  },
+  card371: {
+    width: 2,
+    height: 70
+  },
+  card372: {
+    width: 2,
+    height: 70
+  },
+  card373: {
+    width: 2,
+    height: 70
+  },
+  card374: {
+    width: 2,
+    height: 70
+  },
+  card375: {
+    width: 2,
+    height: 70
+  },
+  card376: {
+    width: 2,
+    height: 70
+  },
+  card377: {
+    width: 2,
+    height: 70
+  },
+  card378: {
+    width: 2,
+    height: 70
+  },
+  card379: {
+    width: 2,
+    height: 70
+  },
+  card380: {
+    width: 2,
+    height: 70
+  },
+  card381: {
+    width: 2,
+    height: 70
+  },
+  card382: {
+    width: 2,
+    height: 70
+  },
+  card383: {
+    width: 2,
+    height: 70
+  },
+  card384: {
+    width: 2,
+    height: 70
+  },
+  card385: {
+    width: 2,
+    height: 70
+  },
+  card386: {
+    width: 2,
+    height: 70
+  },
+  card387: {
+    width: 2,
+    height: 70
+  },
+  card388: {
+    width: 2,
+    height: 70
+  },
+  card389: {
+    width: 2,
+    height: 70
+  },
+  card390: {
+    width: 2,
+    height: 70
+  },
+  card391: {
+    width: 2,
+    height: 70
+  },
+  card392: {
+    width: 2,
+    height: 70
+  },
+  card393: {
+    width: 2,
+    height: 70
+  },
+  card394: {
+    width: 2,
+    height: 70
+  },
+  card395: {
+    width: 2,
+    height: 70
+  },
+  card396: {
+    width: 2,
+    height: 70
+  },
+  card397: {
+    width: 2,
+    height: 70
+  },
+  card398: {
+    width: 2,
+    height: 70
+  },
+  card399: {
+    width: 2,
+    height: 70
+  },
+  card400: {
+    width: 2,
+    height: 70
+  },
+  card401: {
+    width: 2,
+    height: 70
+  },
+  card402: {
+    width: 2,
+    height: 70
+  },
+  card403: {
+    width: 2,
+    height: 70
+  },
+  card404: {
+    width: 2,
+    height: 70
+  },
+  card405: {
+    width: 2,
+    height: 70
+  },
+  card406: {
+    width: 2,
+    height: 70
+  },
+  card407: {
+    width: 2,
+    height: 70
+  },
+  card408: {
+    width: 2,
+    height: 70
+  },
+  card409: {
+    width: 2,
+    height: 70
+  },
+  card410: {
+    width: 2,
+    height: 70
+  },
+  card411: {
+    width: 2,
+    height: 70
+  },
+  card412: {
+    width: 2,
+    height: 70
+  },
+  card413: {
+    width: 2,
+    height: 70
+  },
+  card414: {
+    width: 2,
+    height: 70
+  },
+  card415: {
+    width: 2,
+    height: 70
+  },
+
 }
 
 
