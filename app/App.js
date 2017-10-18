@@ -3,13 +3,17 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  Animated,
+  Dimensions,
+  PanResponder
 } from 'react-native';
 
 export default class App extends Component<{}> {
   constructor(props){
     super(props);
     this.state = {
+      pan: new Animated.ValueXY(),
       shoe: [],
       playerCards: [],
       bankerCards: [],
@@ -36,6 +40,20 @@ export default class App extends Component<{}> {
     this.checkTie = this.checkTie.bind(this);
     this.checkHandWinner = this.checkHandWinner.bind(this);
     this.resetBonus = this.resetBonus.bind(this);
+    this.renderDraggable = this.renderDraggable.bind(this);
+    this.panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderMove: Animated.event([null, {
+        dx: this.state.pan.x,
+        dy: this.state.pan.y
+      }]),
+      onPanResponderRelease: (e, gesture) => {
+        Animated.spring(
+          this.state.pan,
+          {toValue:{x:0,y:0}}
+        ).start();
+      }
+    });
   }
 
   componentWillMount(){
@@ -92,8 +110,6 @@ export default class App extends Component<{}> {
 
     this.setState({
       shoe: newShoe
-    }, () => {
-      this.deal();
     });
   }
 
@@ -279,6 +295,18 @@ export default class App extends Component<{}> {
       playerWon: false,
       bankerWon: false
     });
+  }
+
+  renderDraggable(){
+    return (
+      <View style={draggableStyles.draggableContainer}>
+        <Animated.View
+          {...this.panResponder.panHandlers}
+          style={[this.state.pan.getLayout(), draggableStyles.circle]}>
+          <Text style={draggableStyles.text}>100</Text>
+        </Animated.View>
+      </View>
+    )
   }
 
   render() {
@@ -853,6 +881,7 @@ export default class App extends Component<{}> {
             }
           </View>
         </View>
+        {this.renderDraggable()}
         <View style={betOptions.container}>
           <View style={bonusOptions.container}>
             <View style={pandaStyle.container}>
@@ -1000,6 +1029,36 @@ const deckOfCards = {
     'KD': ['KD', 0]
   }
 };
+
+let Window = Dimensions.get('window');
+let CIRCLE_RADIUS = 36;
+let draggableStyles = StyleSheet.create({
+  mainContainer: {
+    flex: 1
+  },
+  dropZone: {
+    height: 100,
+    backgroundColor: 'black'
+  },
+  text: {
+    marginTop: 25,
+    marginLeft: 5,
+    marginRight: 5,
+    textAlign: 'center',
+    color: 'red'
+  },
+  draggableContainer: {
+    position: 'absolute',
+    bottom: 20,
+    right: Window.height/2 - CIRCLE_RADIUS
+  },
+  circle: {
+    backgroundColor: 'white',
+    width: CIRCLE_RADIUS*2,
+    height: CIRCLE_RADIUS*2,
+    borderRadius: CIRCLE_RADIUS
+  }
+});
 
 const dealtPlayerCard = {
   container: {
