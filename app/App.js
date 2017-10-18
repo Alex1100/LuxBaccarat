@@ -39,7 +39,9 @@ export default class App extends Component<{}> {
   }
 
   componentWillMount(){
-    if(this.state.shoe.length === 0){
+    if(this.state.shoe.length === 0 && this.state.shoe.hasOwnProperty('size') === false){
+      this.shuffleShoe();
+    } else if(this.state.shoe.size() === 0){
       this.shuffleShoe();
     }
   }
@@ -90,28 +92,21 @@ export default class App extends Component<{}> {
 
     this.setState({
       shoe: newShoe
-    }, () => console.log("NEW SHOE IS: ", newShoe));
+    }, () => {
+      this.deal();
+    });
   }
 
   deal(){
+    console.log('fired off deal fubction: ', this.state.shoe.size());
+    const pHand = [this.state.shoe.container[0], this.state.shoe.container[2]];
+    const bHand = [this.state.shoe.container[1], this.state.shoe.container[3]];
+    console.log("PLAYER HAND IS: ", pHand);
+    console.log("BANKER HAND IS: ", bHand);
     this.setState({
-      playerCards: this.state.playerCards.push(this.state.shoe.getFirstInQueue()),
-      shoe: this.state.shoe.dequeue()
-    }, () => {
-      this.setState({
-        bankerCards: this.state.bankerCards.push(this.state.shoe.getFirstInQueue()),
-        shoe: this.state.shoe.dequeue()
-      }, () => {
-        this.setState({
-          playerCards: thist.state.playerCards.push(this.state.shoe.getFirstInQueue()),
-          shoe: this.state.shoe.dequeue()
-        }, () => {
-          this.setState({
-            bankerCards: this.state.bankerCards.push(this.state.shoe.getFirstInQueue()),
-            shoe: this.state.shoe.dequeue()
-          });
-        });
-      });
+      playerCards: pHand,
+      bankerCards: bHand,
+      shoe: this.state.shoe.dequeue().dequeue().dequeue().dequeue()
     });
   }
 
@@ -289,7 +284,7 @@ export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
-        {this.state.shoe.size() > 0 ?
+        {this.state.shoe.container ?
             <View style={cards.container}>
               <View style={firstCard.container}>
               {
@@ -309,11 +304,553 @@ export default class App extends Component<{}> {
             <Text style={displayPlayer.textStyle}>
               Player
             </Text>
+            { this.state.playerCards.length > 0 ?
+              <View style={dealtPlayerCard.container}>
+                {
+                  this.state.playerCards.map((element, index) => {
+                      switch(element[0]){
+                      case 'AC':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_AC.svg.png')} />
+                      case 'AD':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_AD.svg.png')} />
+                      case 'AH':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_AH.svg.png')} />
+                      case 'AS':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_AS.svg.png')} />
+                      case '10C':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_10C.svg.png')} />
+                      case '10D':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_10D.svg.png')} />
+                      case '10H':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_10H.svg.png')} />
+                      case '10S':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_10D.svg.png')} />
+                      case '2C':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_2C.svg.png')} />
+                      case '2D':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_2D.svg.png')} />
+                      case '2H':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_2H.svg.png')} />
+                      case '2S':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_2S.svg.png')} />
+                      case '3C':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_3C.svg.png')} />
+                      case '3D':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_3D.svg.png')} />
+                      case '3H':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_3H.svg.png')} />
+                      case '3S':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_3S.svg.png')} />
+                      case '4C':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_4C.svg.png')} />
+                      case '4D':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_4D.svg.png')} />
+                      case '4H':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_4H.svg.png')} />
+                      case '4S':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_4S.svg.png')} />
+                      case '5C':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_5C.svg.png')} />
+                      case '5D':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_5D.svg.png')} />
+                      case '5H':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_5H.svg.png')} />
+                      case '5S':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_5S.svg.png')} />
+                      case '6C':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_6C.svg.png')} />
+                      case '6D':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_6D.svg.png')} />
+                      case '6H':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_6H.svg.png')} />
+                      case '6S':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_6S.svg.png')} />
+                      case '7C':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_7C.svg.png')} />
+                      case '7D':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_7D.svg.png')} />
+                      case '7H':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_7H.svg.png')} />
+                      case '7S':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_7S.svg.png')} />
+                      case '8C':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_8C.svg.png')} />
+                      case '8D':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_8D.svg.png')} />
+                      case '8H':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_8H.svg.png')} />
+                      case '8S':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_8S.svg.png')} />
+                      case '9C':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_9C.svg.png')} />
+                      case '9D':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_9D.svg.png')} />
+                      case '9H':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_9H.svg.png')} />
+                      case '9S':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_9S.svg.png')} />
+                      case 'JC':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_JC.svg.png')} />
+                      case 'JD':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_JD.svg.png')} />
+                      case 'JH':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_JH.svg.png')} />
+                      case 'JS':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_JS.svg.png')} />
+                      case 'QC':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_QC.svg.png')} />
+                      case 'QD':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_QD.svg.png')} />
+                      case 'QH':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_QH.svg.png')} />
+                      case 'QS':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_QS.svg.png')} />
+                      case 'KC':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_KC.svg.png')} />
+                      case 'KD':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_KD.svg.png')} />
+                      case 'KH':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_KH.svg.png')} />
+                      case 'KS':
+                        return <Image
+                                  key={index}
+                                  style={dealtPlayerCard.card}
+                                  source={require('../assets/images/card_KS.svg.png')} />
+                      default: null
+                    }
+                  })
+                }
+              </View> : null
+            }
           </View>
           <View style={displayBanker.container}>
             <Text style={displayBanker.textStyle}>
               Banker
             </Text>
+            { this.state.bankerCards.length > 0 ?
+              <View style={dealtBankerCard.container}>
+                {
+                  this.state.bankerCards.map((element, index) => {
+                      switch(element[0]){
+                      case 'AC':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_AC.svg.png')} />
+                      case 'AD':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_AD.svg.png')} />
+                      case 'AH':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_AH.svg.png')} />
+                      case 'AS':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_AS.svg.png')} />
+                      case '10C':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_10C.svg.png')} />
+                      case '10D':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_10D.svg.png')} />
+                      case '10H':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_10H.svg.png')} />
+                      case '10S':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_10D.svg.png')} />
+                      case '2C':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_2C.svg.png')} />
+                      case '2D':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_2D.svg.png')} />
+                      case '2H':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_2H.svg.png')} />
+                      case '2S':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_2S.svg.png')} />
+                      case '3C':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_3C.svg.png')} />
+                      case '3D':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_3D.svg.png')} />
+                      case '3H':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_3H.svg.png')} />
+                      case '3S':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_3S.svg.png')} />
+                      case '4C':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_4C.svg.png')} />
+                      case '4D':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_4D.svg.png')} />
+                      case '4H':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_4H.svg.png')} />
+                      case '4S':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_4S.svg.png')} />
+                      case '5C':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_5C.svg.png')} />
+                      case '5D':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_5D.svg.png')} />
+                      case '5H':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_5H.svg.png')} />
+                      case '5S':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_5S.svg.png')} />
+                      case '6C':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_6C.svg.png')} />
+                      case '6D':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_6D.svg.png')} />
+                      case '6H':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_6H.svg.png')} />
+                      case '6S':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_6S.svg.png')} />
+                      case '7C':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_7C.svg.png')} />
+                      case '7D':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_7D.svg.png')} />
+                      case '7H':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_7H.svg.png')} />
+                      case '7S':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_7S.svg.png')} />
+                      case '8C':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_8C.svg.png')} />
+                      case '8D':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_8D.svg.png')} />
+                      case '8H':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_8H.svg.png')} />
+                      case '8S':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_8S.svg.png')} />
+                      case '9C':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_9C.svg.png')} />
+                      case '9D':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_9D.svg.png')} />
+                      case '9H':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_9H.svg.png')} />
+                      case '9S':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_9S.svg.png')} />
+                      case 'JC':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_JC.svg.png')} />
+                      case 'JD':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_JD.svg.png')} />
+                      case 'JH':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_JH.svg.png')} />
+                      case 'JS':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_JS.svg.png')} />
+                      case 'QC':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_QC.svg.png')} />
+                      case 'QD':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_QD.svg.png')} />
+                      case 'QH':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_QH.svg.png')} />
+                      case 'QS':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_QS.svg.png')} />
+                      case 'KC':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_KC.svg.png')} />
+                      case 'KD':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_KD.svg.png')} />
+                      case 'KH':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_KH.svg.png')} />
+                      case 'KS':
+                        return <Image
+                                  key={index}
+                                  style={dealtBankerCard.card}
+                                  source={require('../assets/images/card_KS.svg.png')} />
+                      default: null
+                    }
+                  })
+                }
+              </View> : null
+            }
           </View>
         </View>
         <View style={betOptions.container}>
@@ -355,6 +892,24 @@ export default class App extends Component<{}> {
 let Queue = function() {
   this.count = 0;
   this.container = {};
+  this.getFirstInQueue = function(){
+    return this.container[0];
+  };
+  this.dequeue = function(){
+    var removed = this.container[0];
+    delete this.container[0];
+    this.count--;
+
+    for(let i = 0; i < this.count + 1; i++){
+      this.container[i] = this.container[i + 1];
+      if(this.container[i] === undefined){
+        delete this.container[i];
+      }
+    }
+
+    return this;
+  };
+
 };
 
 Queue.prototype.enqueue = function(card){
@@ -446,29 +1001,55 @@ const deckOfCards = {
   }
 };
 
+const dealtPlayerCard = {
+  container: {
+    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingLeft: 50,
+    top: 10,
+    width: 65,
+    height: 100,
+  },
+  card: {
+    width: 65,
+    marginRight: 5,
+    height: 80,
+    backgroundColor: 'red'
+  }
+}
+
+const dealtBankerCard = {
+  container: {
+    flexDirection: 'row',
+    paddingLeft: 10,
+    top: 10,
+    width: 65,
+    height: 100,
+  },
+  card: {
+    width: 65,
+    height: 80,
+    marginLeft: 5,
+    backgroundColor: 'red'
+  }
+}
+
+
 const cardDisplay = {
   container: {
     justifyContent: 'center',
     width: 279,
-    height: 120,
-    top: 100,
+    height: 200,
+    top: 70,
     left: 47.5,
-    // borderRightWidth: 1,
-    // borderLeftWidth: 1,
-    // borderBottomWidth: 1,
-    // borderTopWidth: 1,
-    // borderBottomLeftRadius: 30,
-    // borderBottomRightRadius: 30,
-    // borderBottomColor: '#e2a643',
-    // borderColor: '#e2a643',
-    opacity: 0.7
+    opacity: 0.7,
   }
 }
 
 const displayPlayer = {
   container: {
     width: 140,
-    height: 120,
+    height: 200,
     top: 60,
     borderRightWidth: 2,
     borderColor: '#e2a643',
@@ -487,8 +1068,8 @@ const displayPlayer = {
 const displayBanker = {
   container: {
     width: 140,
-    height: 120,
-    bottom: 60,
+    height: 200,
+    bottom: 140,
     left: 139,
     borderLeftWidth: 2,
     borderColor: '#e2a643',
